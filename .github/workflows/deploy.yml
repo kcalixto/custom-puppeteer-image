@@ -1,4 +1,4 @@
-name: 🤖 poc-ecr-lambda
+name: custom-puppeteer-image
 on:
   push:
     branches:
