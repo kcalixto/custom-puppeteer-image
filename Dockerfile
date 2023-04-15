@@ -13,5 +13,3 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 # Set the environment variable to run in headless mode
 ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/google-chrome-stable"
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
-
-ARG LAMBDA_TASK_ROOT
