@@ -13,17 +13,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Create GitHub Tag
-        uses: actions/create-release@v1
-        id: create_release
+      - name: Bump version and push tag
+        id: create_tag
+        uses: anothrNick/github-tag-action@1.61.0 # Don't use @master unless you're happy to test the latest version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.sha }}
-          release_name: Release ${{ github.sha }}
-          body: Automated release created by GitHub Actions
-          draft: false
-          prerelease: false
+          WITH_V: false
 
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
@@ -42,5 +37,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.create_release.outputs.id }}
+          tags: ${{ steps.create_tag.outputs.new_tag }}
           labels: ${{ steps.meta.outputs.labels }}
