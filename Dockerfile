@@ -10,18 +10,6 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
   apt-get update && \
   apt-get install -y google-chrome-stable
 
-# Set up the app directory
-WORKDIR /app
-
-# Copy the package.json and package-lock.json files
-COPY package*.json ./
-
-# Install app dependencies
-RUN npm ci
-
-# Copy the rest of the app
-COPY . .
-
 # Set the environment variable to run in headless mode
 ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/google-chrome-stable"
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
